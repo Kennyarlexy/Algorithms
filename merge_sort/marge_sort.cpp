@@ -12,7 +12,7 @@ void print(const vector<int> &array) {
 }
 
 pair<vector<int>, vector<int>> split(const vector<int> &array) {
-    int mid = (array.size() + 1) / 2;
+    int mid = (array.size() + 1) / 2; //actually one pass mid, given how the below constructor works
 
     vector<int> leftArray(array.begin(), array.begin() + mid);
     vector<int> rightArray(array.begin() + mid, array.end());
