@@ -1,9 +1,14 @@
 #include "linked_list.cpp" //not recommended to include .cpp file in a real world projects, use .h file instead to define the class and other .cpp file for the implementation.
 
+/*
+
+*/
+
 pair<LinkedList, LinkedList> split(LinkedList &linked_list) {
     /*
     since LinkedList only contains a single pointer -- which is the head -- then there is no need to worry about the memory usage when creating a new LinkedList from an existing one.
-    We're essentially creating a new pointer to the old existing linked_list -- which nodes never actually changes.
+    We're essentially creating a new pointer to the old existing linked_list -- which new nodes never actually added, only the pointer to the next_node is modified.
+    since .size() method will traverse the entire linked_list (or sub linked_list) and .getNodeAt() will traverse until the midpoint. the time complexity of this function is O(N+k) or equal to O(N).
     */
     int mid = (linked_list.size() - 1) / 2;
     Node* mid_node = linked_list.getNodeAt(mid);
@@ -16,7 +21,11 @@ pair<LinkedList, LinkedList> split(LinkedList &linked_list) {
     return make_pair(left, right);
 }
 
-LinkedList merge(LinkedList &left, LinkedList &right) { 
+LinkedList merge(LinkedList &left, LinkedList &right) {
+    /*
+    this function will traverse entire left and right in total, so the time complexity of this function is O(N)
+    */
+    
     LinkedList merged;
     merged.add(0);
     Node* merged_pointer = merged.head;
@@ -53,6 +62,9 @@ LinkedList merge(LinkedList &left, LinkedList &right) {
 }
 
 LinkedList mergeSort(LinkedList &linked_list) {
+    /*
+    since .split() function takes O(N) and .merge() function takes O(N) time and we do these for log (N) times. the overall time complexity is (2N log (N)) or equal to (N log (N))
+    */
     if (linked_list.size() < 2) return linked_list;
 
     LinkedList left, right;
